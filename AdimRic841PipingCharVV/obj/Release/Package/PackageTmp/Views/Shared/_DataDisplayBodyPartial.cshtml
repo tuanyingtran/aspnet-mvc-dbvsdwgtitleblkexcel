@@ -1,0 +1,131 @@
+﻿@model IList<AdimRic841PipingCharVV.Models.FunctionalLocationWithDwgDataModel>
+
+<!-- BEGIN ROW 'SEARCH' & 'VALIDATE'-->
+<div class="row">
+    <!-- ** BEGIN VALIDATE AREA ** -->
+    <div class="col col-md-6 col-sm-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h1 class="panel-title">Validate Datase against Drawing</h1>
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    @Html.Label("Location Id")
+                    @Html.TextBox("SearchFunctionLocation", "", new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="panel-footer">
+                <button id="btnApiPipeClass"
+                        class="btn btn-sm btn-primary"
+                        onclick="location.href='@Url.Action("ValidateApiPipeClass", "Home")'"
+                        data-pdsa-action="validate">
+                    <i class="glyphicon glyphicon-check"></i>
+                    &nbsp;Api Pipe Class
+                </button>
+
+                <button id="btnRefPipeClass"
+                        class="btn btn-sm btn-primary"
+                        onclick="location.href='@Url.Action("ValidateRefineryPipeClass", "Home")'"
+                        data-pdsa-action="validate">
+                    <i class="glyphicon glyphicon-check"></i>
+                    &nbsp;Refinery Pipe Class
+                </button>
+
+
+
+                <button id="btnPiping Material"
+                        class="btn btn-sm btn-primary"
+                        onclick="location.href='@Url.Action("ValidateMaterialPipeClass", "Home")'"
+                        data-pdsa-action="validate">
+                    <i class="glyphicon glyphicon-check"></i>
+                    &nbsp;Piping Material
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ** END VALIDATE AREA ** -->
+    <!-- ** BEGIN SEARCH AREA ** -->
+    <div class="col col-md-6 col-sm-6">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h1 class="panel-title">Search</h1>
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+
+                    @Html.Label("Location Id")
+                    @Html.TextBox("SearchFunctionLocation", "", new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="panel-footer">
+                <button id="btnSearch"
+                        class="btn btn-sm btn-default"
+                        data-pdsa-action="search">
+                    <i class="glyphicon glyphicon-search"></i>
+                    &nbsp;Search
+                </button>
+                <button id="btnReset"
+                        class="btn btn-sm btn-default"
+                        data-pdsa-action="resetsearch">
+                    <i class="glyphicon glyphicon-share-alt"></i>
+                    &nbsp;Reset
+                </button>
+
+                <button id="btnAdd"
+                        class="btn btn-sm btn-success"
+                        onclick="location.href='@Url.Action("AddRecord", "Home")'"
+                        data-pdsa-action="add">
+                    <i class="glyphicon glyphicon-plus"></i>
+                    &nbsp;Add
+                </button>
+
+            </div>
+        </div>
+    </div>
+    <!-- ** END SEARCH AREA ** -->
+</div>
+<!-- END ROW 'SEARCH' & 'VALIDATE'-->
+
+<div class="form-group">
+    @using (Html.BeginForm("UpdateMaterialField", "Home"))
+    {
+        <button class="btn btn-warning" type="submit"><span class="glyphicon glyphicon-transfer"></span> Update Material Field, matching with dwg data</button>
+    }
+
+</div>
+
+<table class="table table-striped table-bordered table-condensed table-hover">
+    <thead>
+        <tr>
+            <th class="pdsa-action-button-column">Edit</th>
+            <th>Location Id</th>
+            <th>Unit</th>
+            <th>Business Area</th>
+
+            <th>Api Pipe Class</th>
+            @if (Model[0].IsValidateApi)//Pick index 0 to check which field is validated
+            {
+                <th class="h5" style="color: blue">Dwg Api Pipe Class</th>
+            }
+            <th>Refinery Pipe Class</th>
+            @if (Model[0].IsValidateRefineryPipeClass)
+            {
+                <th class="h5" style="color: blue">Dwg Refinery Pipe Class</th>
+            }
+
+            <th>Piping Material</th>
+            @if (Model[0].IsValidatePipingMaterial)
+            {
+                <th class="h5" style="color: blue">Dwg Piping Material</th>
+            }
+            <th class="pdsa-action-button-column">Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var funLoc in Model)
+        {
+            @Html.Partial("_DwgCmMergeRowPartial", funLoc)
+        }
+    </tbody>
+</table>

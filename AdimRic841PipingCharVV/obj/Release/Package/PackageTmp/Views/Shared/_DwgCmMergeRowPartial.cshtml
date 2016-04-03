@@ -1,0 +1,55 @@
+﻿@model AdimRic841PipingCharVV.Models.FunctionalLocationWithDwgDataModel
+
+<tr>
+    <td class="pdsa-action-button-column">
+        <a href="#" onclick="return confirm('Edit the record?');" class="btn btn-info btn-sm" data-pdsa-action="edit">
+            <i class="glyphicon glyphicon-edit"></i>
+        </a>
+    </td>
+    <td>@Model.LocationId</td>
+    <td>@Model.Unit</td>
+    <td>@Model.BusinesssArea</td>
+
+    <td>@Model.ApiPipeClass</td>
+    @if (Model.IsValidateApi)//display if validation selected x3
+    {
+        if(Model.ApiPipeClass != Model.DwgApiPipeClass) {
+            <td style="color: black"><mark>@Model.DwgApiPipeClass</mark></td>
+        }
+        else { 
+            <td>@Model.DwgApiPipeClass</td>
+        }
+    }
+
+    <td>@Model.RefineryPipeClass</td>
+    @if (Model.IsValidateRefineryPipeClass)
+    {
+        //highlight if different
+        if (Model.RefineryPipeClass != Model.DwgRefineryPipeClass)
+        {
+            <td style="color: black"><mark>@Model.DwgRefineryPipeClass</mark></td>
+        }
+        else {
+            <td>@Model.DwgRefineryPipeClass</td>
+        }      
+    }
+
+    <td>@Model.PipingMaterial</td>
+    @if (Model.IsValidatePipingMaterial)
+    {
+        //highlight if different
+        if (Model.PipingMaterial != Model.DwgPipingMaterial)
+        {
+            <td style="color: black"><mark>@Model.DwgPipingMaterial</mark></td>
+        }
+        else {
+            <td>@Model.DwgPipingMaterial</td>
+        }
+    }
+
+    <td class="pdsa-action-button-column">
+        <a href="#" onclick="return confirm('DELETE the record?');" class="btn btn-danger btn-sm" data-pdsa-action="delete">
+            <i class="glyphicon glyphicon-trash"></i>
+        </a>
+    </td>
+</tr>

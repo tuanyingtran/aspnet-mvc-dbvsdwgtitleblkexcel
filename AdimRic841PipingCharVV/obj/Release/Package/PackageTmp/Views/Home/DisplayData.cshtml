@@ -1,0 +1,25 @@
+﻿@model IList<AdimRic841PipingCharVV.Models.FunctionalLocationModel>
+@{
+    ViewBag.Title = "Display Database Data";
+}
+
+<h3 class="h3">Database Data</h3>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Location Id</th>
+            <th>Unit</th>
+            <th>Business Area</th>
+            <th>Api Pipe Class</th>
+            <th>Refinery Pipe Class</th>
+            <th>Material</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var funLoc in Model)
+    {
+        @Html.Partial("_DataRowPartial",funLoc)
+    }
+    </tbody>
+</table>
